@@ -1,10 +1,8 @@
-import 'dart:html';
-
-class Inventory {
+class InventoryItem {
   String itemName = '';
   String itemPicture = '';
 
-  Inventory({itemName, itemPicture}) {
+  InventoryItem({itemName, itemPicture}) {
     this.itemName = itemName;
     this.itemPicture = itemPicture;
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'Inventory/inventory.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -14,16 +15,14 @@ class Inventory extends StatefulWidget {
 }
 
 class _InventoryState extends State<Inventory> {
-  List<String> currentInventory = [
-    'garam masala',
-    'chole masala',
-    'red chilli powder',
-    'turmeric powder',
-    'kheer powder',
-    'potato chips',
-    'tortillas',
-    'besan flour',
-    'rajma'
+  List<InventoryItem> currentInventory = [
+    InventoryItem(itemName: 'garam masal', itemPicture: 'testing'),
+    InventoryItem(itemName: 'rajma', itemPicture: 'testing'),
+    InventoryItem(itemName: 'turmeric powder', itemPicture: 'testing'),
+    InventoryItem(itemName: 'red chilli powder', itemPicture: 'testing'),
+    InventoryItem(itemName: 'kheer powder', itemPicture: 'testing'),
+    InventoryItem(itemName: 'potato chips', itemPicture: 'testing'),
+    InventoryItem(itemName: 'besan flour', itemPicture: 'testing'),
   ];
 
   @override
@@ -54,7 +53,7 @@ class _InventoryState extends State<Inventory> {
               // column of quotes, mapping quotes to a list of text widgets
               Column(
                   children: currentInventory
-                      .map((inventoryItem) => Text(inventoryItem))
+                      .map((inventoryItem) => Text(inventoryItem.itemName))
                       .toList()),
 
               // icon button
