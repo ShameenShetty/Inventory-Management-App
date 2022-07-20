@@ -16,14 +16,65 @@ class Inventory extends StatefulWidget {
 
 class _InventoryState extends State<Inventory> {
   List<InventoryItem> currentInventory = [
-    InventoryItem(itemName: 'garam masal', itemPicture: 'testing'),
-    InventoryItem(itemName: 'rajma', itemPicture: 'testing'),
-    InventoryItem(itemName: 'turmeric powder', itemPicture: 'testing'),
-    InventoryItem(itemName: 'red chilli powder', itemPicture: 'testing'),
-    InventoryItem(itemName: 'kheer powder', itemPicture: 'testing'),
-    InventoryItem(itemName: 'potato chips', itemPicture: 'testing'),
-    InventoryItem(itemName: 'besan flour', itemPicture: 'testing'),
+    InventoryItem(
+        itemName: 'picture 1', itemPicture: 'https://i.imgur.com/pFMWm6g.jpg'),
+    InventoryItem(
+        itemName: 'picture 2', itemPicture: 'https://i.imgur.com/tdfKRg3.jpeg'),
+    InventoryItem(
+        itemName: 'picture 3', itemPicture: 'https://i.imgur.com/HEVIZaA.jpeg'),
+    InventoryItem(
+        itemName: 'picture 4', itemPicture: 'https://i.imgur.com/FyQvCTP.jpeg'),
+    InventoryItem(
+        itemName: 'picture 5', itemPicture: 'https://i.imgur.com/qgcPQF3.jpeg'),
+    InventoryItem(
+        itemName: 'picture 6', itemPicture: 'https://i.imgur.com/anshnRQ.jpeg'),
+    InventoryItem(
+        itemName: 'picture 7', itemPicture: 'https://i.imgur.com/wckJYjk.jpeg'),
   ];
+
+  Widget inventoryCardTemplate(itemName, itemPicture) {
+    return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15.0),
+      ),
+      color: Colors.amber.shade50,
+      clipBehavior: Clip.antiAlias,
+      margin: const EdgeInsets.fromLTRB(16.0, 5.0, 16.0, 5.0),
+      child: Row(
+        children: [
+          const SizedBox(width: 15),
+          Image(
+            isAntiAlias: true,
+            loadingBuilder: (BuildContext context, Widget child,
+                ImageChunkEvent? loadingProgress) {
+              if (loadingProgress == null) return child;
+              return Center(
+                child: CircularProgressIndicator(
+                  value: loadingProgress.expectedTotalBytes != null
+                      ? loadingProgress.cumulativeBytesLoaded /
+                          loadingProgress.expectedTotalBytes!
+                      : null,
+                ),
+              );
+            },
+            image: NetworkImage('$itemPicture'),
+            width: 150,
+            height: 150,
+          ),
+          const SizedBox(
+            width: 15,
+          ),
+          Text('$itemName',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Arima',
+                fontSize: 18,
+                color: Colors.grey[800],
+              ))
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +91,9 @@ class _InventoryState extends State<Inventory> {
         child: Center(
           child: Column(
             children: [
-              Text('First Text'),
-              Text('Second Text'),
-              Text('Third Text'),
+              const Text('First Text'),
+              const Text('Second Text'),
+              const Text('Third Text'),
               ElevatedButton(
                 onPressed: () {
                   print("you clicked on the elevated button");
@@ -53,7 +104,8 @@ class _InventoryState extends State<Inventory> {
               // column of quotes, mapping quotes to a list of text widgets
               Column(
                   children: currentInventory
-                      .map((inventoryItem) => Text(inventoryItem.itemName))
+                      .map((inventoryItem) => inventoryCardTemplate(
+                          inventoryItem.itemName, inventoryItem.itemPicture))
                       .toList()),
 
               // icon button
