@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_management_app/Inventory/add_new_inventory_item.dart';
-import 'Inventory/inventory.dart';
+import 'package:inventory_management_app/Inventory/inventory_data.dart' as inv_data;
 
 void main() {
   runApp(MaterialApp(
@@ -16,23 +16,6 @@ class Inventory extends StatefulWidget {
 }
 
 class _InventoryState extends State<Inventory> {
-  List<InventoryItem> currentInventory = [
-    InventoryItem(
-        itemName: 'picture 1', itemPicture: 'https://i.imgur.com/pFMWm6g.jpg'),
-    InventoryItem(
-        itemName: 'picture 2', itemPicture: 'https://i.imgur.com/tdfKRg3.jpeg'),
-    InventoryItem(
-        itemName: 'picture 3', itemPicture: 'https://i.imgur.com/HEVIZaA.jpeg'),
-    InventoryItem(
-        itemName: 'picture 4', itemPicture: 'https://i.imgur.com/FyQvCTP.jpeg'),
-    InventoryItem(
-        itemName: 'picture 5', itemPicture: 'https://i.imgur.com/qgcPQF3.jpeg'),
-    InventoryItem(
-        itemName: 'picture 6', itemPicture: 'https://i.imgur.com/anshnRQ.jpeg'),
-    InventoryItem(
-        itemName: 'picture 7', itemPicture: 'https://i.imgur.com/wckJYjk.jpeg'),
-  ];
-
   Widget inventoryCardTemplate(itemName, itemPicture) {
     return Card(
       shape: RoundedRectangleBorder(
@@ -104,7 +87,7 @@ class _InventoryState extends State<Inventory> {
 
               // column of quotes, mapping quotes to a list of text widgets
               Column(
-                  children: currentInventory
+                  children: inv_data.currentInventory
                       .map((inventoryItem) => inventoryCardTemplate(
                           inventoryItem.itemName, inventoryItem.itemPicture))
                       .toList()),

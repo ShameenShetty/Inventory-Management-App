@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:inventory_management_app/Inventory/inventory.dart';
+import 'package:inventory_management_app/Inventory/inventory_data.dart'
+    as inv_data;
+import 'package:inventory_management_app/main.dart';
 
 class AddNewInventoryItem {
   String itemPicture = '';
@@ -67,9 +71,16 @@ class AddNewInventoryItem {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    // Navigate back to first route when tapped.
+                    // Add a new item with the entered details then navigate back to first route when tapped.
                     print(
                         'adding the item to the inventory, name is $itemName, pic link is $itemPicture');
+
+                    InventoryItem invItem = InventoryItem(
+                        itemName: itemName, itemPicture: itemPicture);
+
+                    inv_data.currentInventory.add(invItem);
+
+                    Navigator.pop(context);
                   },
                   child: const Text('Add Item'),
                 ),
