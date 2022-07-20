@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:inventory_management_app/Inventory/add_new_inventory_item.dart';
 import 'Inventory/inventory.dart';
 
 void main() {
@@ -123,6 +124,11 @@ class _InventoryState extends State<Inventory> {
         child: Image.asset('assets/images/add_item_to_inventory.png'),
         onPressed: () {
           print('adding a new item to the inventory');
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      AddNewInventoryItem().addNewItemPage(context)));
         },
       ),
     );
