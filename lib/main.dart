@@ -12,7 +12,7 @@ void main() {
 }
 
 class Inventory extends StatefulWidget {
-  const Inventory({Key? key}) : super(key: key);
+  const Inventory();
 
   @override
   State<Inventory> createState() => _InventoryState();
@@ -27,40 +27,66 @@ class _InventoryState extends State<Inventory> {
       color: Colors.amber.shade50,
       clipBehavior: Clip.antiAlias,
       margin: const EdgeInsets.fromLTRB(16.0, 5.0, 16.0, 5.0),
-      child: Row(
+      child: Column(
         children: [
-          const SizedBox(width: 15),
-          Image(
-            isAntiAlias: true,
-            loadingBuilder: (BuildContext context, Widget child,
-                ImageChunkEvent? loadingProgress) {
-              if (loadingProgress == null) return child;
-              return Center(
-                child: CircularProgressIndicator(
-                  value: loadingProgress.expectedTotalBytes != null
-                      ? loadingProgress.cumulativeBytesLoaded /
-                          loadingProgress.expectedTotalBytes!
-                      : null,
-                ),
-              );
-            },
-            image: NetworkImage('$itemPicture'),
-            width: 150,
-            height: 150,
+          Row(
+            children: [
+              const SizedBox(width: 15),
+              Image(
+                isAntiAlias: true,
+                loadingBuilder: (BuildContext context, Widget child,
+                    ImageChunkEvent? loadingProgress) {
+                  if (loadingProgress == null) return child;
+                  return Center(
+                    child: CircularProgressIndicator(
+                      value: loadingProgress.expectedTotalBytes != null
+                          ? loadingProgress.cumulativeBytesLoaded /
+                              loadingProgress.expectedTotalBytes!
+                          : null,
+                    ),
+                  );
+                },
+                image: NetworkImage('$itemPicture'),
+                width: 150,
+                height: 150,
+              ),
+              const SizedBox(
+                width: 15,
+              ),
+              Text('$itemName',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Arima',
+                    fontSize: 18,
+                    color: Colors.grey[800],
+                  )),
+            ],
           ),
-          const SizedBox(
-            width: 15,
-          ),
-          Text('$itemName',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontFamily: 'Arima',
-                fontSize: 18,
-                color: Colors.grey[800],
-              ))
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            ElevatedButton.icon(
+                onPressed: () {
+                  removeIventory(itemName);
+                  print('removing the item "$itemName"');
+                },
+                icon: const Icon(Icons.delete),
+                label: const Text('Delete')),
+            const SizedBox(
+              width: 15,
+            ),
+            ElevatedButton.icon(
+                onPressed: () {},
+                icon: const Icon(Icons.edit),
+                label: const Text('Edit')),
+          ]),
         ],
       ),
     );
+  }
+
+  void removeIventory(String itemName) {
+    setState(() {
+      inv_data.currentInventory.remove('$itemName');
+    });
   }
 
   void updateInventoryData(String itemName, String itemPicture) {
@@ -101,7 +127,9 @@ class _InventoryState extends State<Inventory> {
               Column(
                   children: inv_data.currentInventory
                       .map((inventoryItem) => inventoryCardTemplate(
-                          inventoryItem.itemName, inventoryItem.itemPicture))
+                            inventoryItem.itemName,
+                            inventoryItem.itemPicture,
+                          ))
                       .toList()),
 
               // icon button

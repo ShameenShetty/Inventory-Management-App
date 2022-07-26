@@ -85,7 +85,7 @@ class AddNewInventoryItem {
                   child: const Text('Add Item'),
                 ),
                 const SizedBox(
-                  width: 15,
+                  width: 8,
                 ),
                 ElevatedButton(
                   onPressed: () {
