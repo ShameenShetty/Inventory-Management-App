@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_management_app/Inventory/add_new_inventory_item.dart';
-import 'package:inventory_management_app/Inventory/inventory_data.dart' as inv_data;
+import 'package:inventory_management_app/Inventory/inventory_data.dart'
+    as inv_data;
+
+import 'Inventory/inventory.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -58,6 +61,15 @@ class _InventoryState extends State<Inventory> {
         ],
       ),
     );
+  }
+
+  void updateInventoryData(String itemName, String itemPicture) {
+    setState(() {
+      InventoryItem invItem =
+          InventoryItem(itemName: itemName, itemPicture: itemPicture);
+
+      inv_data.currentInventory.add(invItem);
+    });
   }
 
   @override
