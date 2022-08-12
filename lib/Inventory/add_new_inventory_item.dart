@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_management_app/Inventory/inventory.dart';
-import 'package:inventory_management_app/Inventory/inventory_data.dart'
-    as inv_data;
 import 'package:inventory_management_app/main.dart';
 
 class AddNewInventoryItem {
@@ -78,7 +76,12 @@ class AddNewInventoryItem {
                     InventoryItem invItem = InventoryItem(
                         itemName: itemName, itemPicture: itemPicture);
 
-                    inv_data.currentInventory.add(invItem);
+                    /**
+                     * TODO -
+                     * After checking to make sure the textfields are not empty,
+                     * on onpress, pass a func as an arg to add an item to the 
+                     * list, then context.pop to go back to the page
+                     */
 
                     Navigator.pop(context);
                   },
