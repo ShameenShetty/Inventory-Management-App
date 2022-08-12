@@ -135,6 +135,7 @@ class _InventoryState extends State<Inventory> {
               Column(
                   children: currentInventory
                       .map((inventoryItem) => InventoryCard(
+                            create: () {},
                             invItem: inventoryItem,
                             delete: () {
                               setState(() {
@@ -164,8 +165,8 @@ class _InventoryState extends State<Inventory> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) =>
-                      AddNewInventoryItem().addNewItemPage(context)));
+                  builder: (context) => AddNewInventoryItem()
+                      .addNewItemPage(context, currentInventory)));
         },
       ),
     );

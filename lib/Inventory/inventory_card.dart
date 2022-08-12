@@ -3,9 +3,11 @@ import 'package:inventory_management_app/Inventory/inventory.dart';
 
 class InventoryCard extends StatelessWidget {
   final InventoryItem invItem;
+  final Function create;
+  // final Function update;
   final Function delete;
 
-  InventoryCard({required this.invItem, required this.delete});
+  InventoryCard({required this.invItem, required this.delete, required this.create});
 
   @override
   Widget build(BuildContext context) {

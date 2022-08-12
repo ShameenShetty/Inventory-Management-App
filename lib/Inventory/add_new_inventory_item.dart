@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_management_app/Inventory/inventory.dart';
-import 'package:inventory_management_app/main.dart';
+import 'package:inventory_management_app/Inventory/inventory_card.dart';
 
 class AddNewInventoryItem {
   String itemPicture = '';
   String itemName = '';
 
-  Widget addNewItemPage(BuildContext context) {
+  Widget addNewItemPage(BuildContext context, List currentInventoryList) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Add New Item to Inventory',
@@ -73,8 +73,24 @@ class AddNewInventoryItem {
                     print(
                         'adding the item to the inventory, name is $itemName, pic link is $itemPicture');
 
-                    InventoryItem invItem = InventoryItem(
-                        itemName: itemName, itemPicture: itemPicture);
+                    if (itemName.isNotEmpty && itemPicture.isNotEmpty) {
+                      InventoryItem invItem = InventoryItem(
+                          itemName: itemName, itemPicture: itemPicture);
+
+                      InventoryCard(
+                          create: () {
+                            currentInventoryList.add(invItem);
+                          },
+                          delete: () {},
+                          invItem: invItem);
+
+                      print('Done adding an item, popping the context');
+                      Navigator.pop(context);
+                    } else {
+                      // TODO -
+                      // show an alert telling that the fields cannot be
+                      // empty
+                    }
 
                     /**
                      * TODO -
@@ -82,8 +98,6 @@ class AddNewInventoryItem {
                      * on onpress, pass a func as an arg to add an item to the 
                      * list, then context.pop to go back to the page
                      */
-
-                    Navigator.pop(context);
                   },
                   child: const Text('Add Item'),
                 ),
