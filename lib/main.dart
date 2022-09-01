@@ -43,14 +43,14 @@ class MyInventory extends StatelessWidget {
                     ),
                   );
                 },
-                image: NetworkImage('$invItem.itemPicture'),
+                image: NetworkImage(invItem.itemPicture),
                 width: 150,
                 height: 150,
               ),
               const SizedBox(
                 width: 15,
               ),
-              Text('$invItem.itemName',
+              Text(invItem.itemName,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Arima',
@@ -63,7 +63,6 @@ class MyInventory extends StatelessWidget {
             ElevatedButton.icon(
                 onPressed: () {
                   delete(invItem);
-                  print('removing the item "$invItem.itemName"');
                 },
                 icon: const Icon(Icons.delete),
                 label: const Text('Delete')),
@@ -139,8 +138,6 @@ class _InventoryState extends State<Inventory> {
                             invItem: inventoryItem,
                             delete: () {
                               setState(() {
-                                print(
-                                    'updated the function, removing the item');
                                 currentInventory.remove(inventoryItem);
                               });
                             },
@@ -165,7 +162,7 @@ class _InventoryState extends State<Inventory> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => AddNewInventoryItem()
+                  builder: (materialContext) => AddNewInventoryItem()
                       .addNewItemPage(context, currentInventory)));
         },
       ),

@@ -57,7 +57,7 @@ class InventoryCard extends StatelessWidget {
             ElevatedButton.icon(
                 onPressed: () {
                   delete();
-                  print('removing the item "$invItem.itemName"');
+                  print('removing the item "${invItem.itemName}"');
                 },
                 icon: const Icon(Icons.delete),
                 label: const Text('Delete')),
